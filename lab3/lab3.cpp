@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <string>
 
 using namespace std;
@@ -25,10 +25,9 @@ protected:
 public:
 	TwentyOne() {
 	}
-	TwentyOne(string _genre, int _century)
+	TwentyOne(string _genre, int _century) : Books(_century)
 	{
 		genre = _genre;
-		century = _century;
 	}
 	~TwentyOne(){
 	}
@@ -42,11 +41,9 @@ protected:
 public:
 	Horror() {
 	}
-	Horror(int _counter, int _century, string _genre)
+	Horror(int _counter, int _century, string _genre) : TwentyOne (_genre, _century)
 	{
 		counter = _counter;
-		century = _century;
-		genre = _genre;
 	}
 	~Horror() {
 	}
@@ -59,10 +56,9 @@ protected:
 public:
 	Twenty() {
 	}
-	Twenty(string _name, int _century) 
+	Twenty(string _name, int _century) : Books(_century)
 	{
 		name = _name;
-		century = _century;
 	}
 	~Twenty() {
 	}
@@ -75,11 +71,9 @@ protected:
 public:
 	Classic() {
 	}
-	Classic(string _name, int _century, int _year)
+	Classic(string _name, int _century, int _year) : Twenty(_name, _century)
 	{
 		year = _year;
-		name = _name;
-		century = _century;
 	}
 	~Classic() {
 	}
@@ -90,14 +84,10 @@ class AnyBook : public Classic, public Horror
 protected:
 	int age;
 public:
-	AnyBook(string _name, int _century, int _year, int _counter, string _genre, int _age)
+	AnyBook(string _name, int _century, int _year, int _counter, string _genre, int _age) : Classic (_name, _century, _year), Horror(_counter, _century, _genre)
 	{
-		century = _century;
-		year = _year;
-		genre = _genre;
 		age = _age;
-		name = _name;
-		counter = _counter;
+		century = _century;
 	}
 	~AnyBook() {
 	}
@@ -115,7 +105,7 @@ public:
 
 int main()
 {
-	AnyBook a("Qwerty", 21, 2016, 80000, "Classic", 18);
+	AnyBook a("Qwerty", 21, 2016, 80000, "classic", 18);
 	a.ShowAnyBook();
 }
 
