@@ -6,42 +6,42 @@ using namespace std;
 class Books
 {
 protected:
-	int	century;
+	string	publication;
 public:
 	Books(){
 	}
-	Books(int _century)
+	Books(string _publication)
 	{
-		century = _century;
+		publication  = _publication;
 	}
 	~Books(){
 	}
 };
 
-class TwentyOne : public virtual Books
+class American : public virtual Books
 {
 protected:
 	string genre;
 public:
-	TwentyOne() {
+	American() {
 	}
-	TwentyOne(string _genre, int _century) : Books(_century)
+	American(string _genre, string _publication) : Books(_publication)
 	{
 		genre = _genre;
 	}
-	~TwentyOne(){
+	~American(){
 	}
 };
 
 
-class Horror : public TwentyOne
+class Horror : public American
 {
 protected:
 	int counter;
 public:
 	Horror() {
 	}
-	Horror(int _counter, int _century, string _genre) : TwentyOne (_genre, _century)
+	Horror(int _counter, string _publication, string _genre) : American(_genre, _publication)
 	{
 		counter = _counter;
 	}
@@ -49,29 +49,29 @@ public:
 	}
 };
 
-class Twenty : public virtual Books
+class Russish : public virtual Books
 {
 protected:
 	string name;
 public:
-	Twenty() {
+	Russish() {
 	}
-	Twenty(string _name, int _century) : Books(_century)
+	Russish(string _name, string _publication) : Books(_publication)
 	{
 		name = _name;
 	}
-	~Twenty() {
+	~Russish() {
 	}
 };
 
-class Classic : public Twenty
+class Classic : public Russish
 {
 protected:
 	int year;
 public:
 	Classic() {
 	}
-	Classic(string _name, int _century, int _year) : Twenty(_name, _century)
+	Classic(string _name, string _publication, int _year) : Russish(_name, _publication)
 	{
 		year = _year;
 	}
@@ -84,16 +84,16 @@ class AnyBook : public Classic, public Horror
 protected:
 	int age;
 public:
-	AnyBook(string _name, int _century, int _year, int _counter, string _genre, int _age) : Classic (_name, _century, _year), Horror(_counter, _century, _genre)
+	AnyBook(string _name, string _publication, int _year, int _counter, string _genre, int _age) : Classic (_name, _publication, _year), Horror(_counter, _publication, _genre)
 	{
 		age = _age;
-		century = _century;
+		publication = _publication;
 	}
 	~AnyBook() {
 	}
 	void ShowAnyBook()
 	{
-		cout << "Century: " << century << endl;
+		cout << "Publication: " << publication << endl;
 		cout << "Year: " << year << endl;
 		cout << "Genre: " << genre << endl;
 		cout << "Name: " << name << endl;
@@ -105,7 +105,7 @@ public:
 
 int main()
 {
-	AnyBook a("Qwerty", 21, 2016, 80000, "classic", 18);
+	AnyBook a("Qwerty", "Russia-american", 2016, 80000, "classic", 18);
 	a.ShowAnyBook();
 }
 
